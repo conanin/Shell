@@ -1,0 +1,15 @@
+#!/usr/bin/expect
+set host [lindex $argv 0]
+set password "ppm"
+set cm [lindex $argv 1]
+
+spawn ssh ppm@$host
+
+expect {
+"yes/no" { send "yes\r" }
+"password:" { send "$password\r"}
+}
+expect "]*"
+send "$cm\r"
+expect "]*"
+send "exit\r"

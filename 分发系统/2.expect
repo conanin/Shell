@@ -1,0 +1,17 @@
+#! /usr/bin/expect
+set host [lindex $argv 0]
+set user [lindex $argv 1]
+set passwd [lindex $argv 2]
+set cm [lindex $argv 3]
+
+spawn ssh $user@$host
+
+expect {
+"yes/no" {send "yes\r" }
+"password:" { send "$passwd\r" }
+}
+expect "]*"
+send "$cm\r"
+expect "]*"
+send "exit\r"
+# interact

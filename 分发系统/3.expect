@@ -1,0 +1,11 @@
+#! /usr/bin/expect
+set passwd "ppm"
+
+spawn rsync -avzP ppm@16.165.216.101:/tmp/12.txt /tmp/
+
+expect {
+"yes/no" {send "yes\r" }
+"password:" { send "$passwd\r" }
+}
+expect eof
+# interact

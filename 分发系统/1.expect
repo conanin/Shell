@@ -1,0 +1,16 @@
+#! /usr/bin/expect
+set host "16.165.216.101"
+set user "ppm"
+set passwd "ppm"
+spawn ssh $user@$host
+expect {
+"yes/no" {send "yes\r"; exp_continue }
+"password:" { send "$passwd\r" }
+}
+expect "]*"
+send "whoami\r"
+expect "]*"
+send "echo 1212 > /tmp/12.txt\r"
+expect "]*"
+send "exit\r"
+# interact
